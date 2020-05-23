@@ -1,0 +1,7 @@
+Click==7.*
+
+# Code format
+black
+
+# Static code analysis
+flake8
