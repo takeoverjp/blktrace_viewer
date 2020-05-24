@@ -1,6 +1,16 @@
 #!/bin/bash -e
 
-btt -i sample.blktrace.0 -l sample -q sample -z sample > /dev/null
+if [ $# != 3 ]; then
+    echo "[USAGE] $0 BLKRAW PREFIX DEVNO"
+    exit
+fi
+
+BLKRAW=$1
+PREFIX=$2
+DEVNO=$3
+
+btt -i ${BLKRAW} -l ${PREFIX} -q ${PREFIX} -z ${PREFIX} > ${PREFIX}.btt
 for TYPE in "q2c" "q2d" "d2c"; do
-    python ../blktrace_viewer/main.py -t ${TYPE} -o "sample_259,0_${TYPE}.dat" "sample_259,0_${TYPE}.png"
+    BASE="${PREFIX}_${DEVNO}_${TYPE}"
+    python ../blktrace_viewer/main.py -t ${TYPE} -o "${BASE}.dat" "${BASE}.png"
 done
