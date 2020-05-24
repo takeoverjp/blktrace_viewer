@@ -1,4 +1,6 @@
 Click==7.*
+pandas==1.*
+matplotlib==3.*
 
 # Code format
 black
